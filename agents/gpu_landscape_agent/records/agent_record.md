@@ -4,7 +4,7 @@
 
 | Field | Student record |
 |---|---|
-| Student / team | Student name to be added by repository owner |
+| Student / team | `yicrry777` (GitHub repository owner; replace with formal student name if required) |
 | Assignment / specialist agent | Assignment 8 — AI GPU Landscape Agent |
 | Date | 2026-11-13 |
 | GitHub repository | https://github.com/yicrry777/1800lab8 |
