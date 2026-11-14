@@ -2,6 +2,17 @@
 
 This is the **frozen course baseline** distributed through Brightspace for Emerging Technologies Assignments 2-8.
 
+## Assignment 8 implementation
+
+The completed and tested Assignment 8 agent is in [`agents/gpu_landscape_agent/`](agents/gpu_landscape_agent/). It assesses the landscape for data-center AI GPU accelerators and adjacent alternatives using a life-sciences on-premises RAG case and a cloud-native computer-vision startup contrast case.
+
+Start with:
+
+- [`agents/gpu_landscape_agent/records/agent_record.md`](agents/gpu_landscape_agent/records/agent_record.md)
+- [`agents/gpu_landscape_agent/records/test_record.md`](agents/gpu_landscape_agent/records/test_record.md)
+- [`agents/gpu_landscape_agent/records/landscape_comparison.md`](agents/gpu_landscape_agent/records/landscape_comparison.md)
+- [`agents/gpu_landscape_agent/evidence/source_register.md`](agents/gpu_landscape_agent/evidence/source_register.md)
+
 ## What this scaffold does
 
 It gives every specialist agent the same:
