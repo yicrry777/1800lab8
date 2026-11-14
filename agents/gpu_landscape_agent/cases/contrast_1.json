@@ -1,0 +1,14 @@
+{
+  "emerging_technology": "Data-center AI GPU accelerators for generative-AI inference",
+  "intended_application": "Cloud-based training and inference for rapidly changing computer-vision and multimodal models used to inspect commercial building images",
+  "organization": "A 25-person U.S. venture-backed computer-vision startup",
+  "industry_sector": "Commercial property technology software",
+  "business_need": "Run short, bursty model experiments and launch customer pilots quickly without committing scarce capital to a data center",
+  "users_stakeholders": "ML engineers, product managers, startup customers, cloud operations, founders, and investors",
+  "adoption_posture": "Aggressive leading-edge adopter that accepts controlled technical risk in exchange for iteration speed",
+  "capabilities_constraints": "Strong PyTorch and container skills; no data-center staff; variable and uncertain demand; limited capital; models can run in approved U.S. cloud regions; engineering can port selected workloads but cannot maintain multiple production stacks indefinitely",
+  "risk_consequence_context": "Missed product milestones and runaway cloud spend are material; failures are reversible through rollback; no clinical or safety-critical use; customer images still require contractual security controls",
+  "management_question": "Which accelerator access strategy should the startup test over the next six months to maximize iteration speed while preserving credible options beyond a single GPU vendor?",
+  "time_horizon": "Immediate experiments and customer pilots over six months; architecture reassessment every quarter",
+  "additional_context": "Assessment date: 2026-11-13. Keep the emerging technology constant while changing application, organization, adoption posture, capabilities, consequences, and ownership model."
+}

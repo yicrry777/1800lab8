@@ -1,0 +1,73 @@
+{
+  "agent": {
+    "name": "AI GPU Landscape Agent",
+    "specialty": "data-center AI GPU and accelerator landscape analysis",
+    "version": "1.0-tested"
+  },
+  "analytical_question": "As of 2026-11-13, which rented accelerator paths should a 25-person computer-vision startup test during the next six months to maximize experiment speed while retaining a credible option beyond one GPU ecosystem?",
+  "general_et_finding": "Data-center AI GPUs are mature deployable infrastructure, but the landscape is still changing too quickly to treat a chip generation as a durable answer. Competition spans NVIDIA and AMD GPU systems plus cloud-provider ASICs such as AWS Trainium and Google TPU; software switching costs and workload-specific performance remain decisive. Current NVIDIA B300 and AMD MI350X documentation shows 288 GB of HBM-class memory and up to 8 TB/s bandwidth per accelerator, and MLPerf offers an architecture-neutral benchmark method. These facts remain stable from the primary case, but a peak specification does not determine which rented instance minimizes this startup's time and cost per completed experiment.",
+  "application_finding": "For bursty computer-vision and multimodal training, the shortlist should be cloud access rather than owned systems: (1) a broadly available NVIDIA GPU instance as the PyTorch compatibility and time-to-first-run baseline; (2) an AMD GPU instance if the required model and kernels are supported; and (3) either AWS Trainium2 or Google TPU only where the chosen framework and model can be ported within a fixed engineering budget. Compare wall-clock time and cloud cost per completed training run, accepted images per second at the inference target, queue or quota delay, failure recovery, and engineer hours. Peak memory bandwidth is secondary unless profiling shows a memory bottleneck. On-premises ownership and facilities work are outside the credible six-month shortlist because demand is variable and the organization has no data-center staff.",
+  "organization_specific_finding": "The startup should rent, benchmark, and keep commitments short. Begin with NVIDIA to protect iteration speed, then time-box one alternate stack on a representative model rather than maintaining three production stacks. Its aggressive posture supports accepting some porting risk, while scarce engineering time makes ecosystem complexity more consequential than the life-sciences company's facility constraints. Reserved cloud capacity may become relevant after utilization stabilizes; hardware ownership should not be considered during this decision horizon. The best option is the one that reduces time and cost per accepted experiment under actual quota and developer constraints, not the newest chip.",
+  "evidence": [
+    {
+      "claim": "NVIDIA documents B300 at 288 GB HBM3e and up to 8 TB/s bandwidth, illustrating the capability and rapid refresh of the GPU baseline.",
+      "source_or_reference": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory/latest/components.html",
+      "date_or_recency": "NVIDIA Enterprise RA dated January 2026; accessed 2026-11-13",
+      "evidence_type": "vendor technical documentation",
+      "notes": "The startup should test cloud instances actually available to it; B300 specifications do not establish instance availability or experiment cost."
+    },
+    {
+      "claim": "AMD lists MI350X at 288 GB HBM3E and 8 TB/s bandwidth with ROCm as its software ecosystem.",
+      "source_or_reference": "https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html",
+      "date_or_recency": "Launch date 2025-06-12; accessed 2026-11-13",
+      "evidence_type": "vendor product specification",
+      "notes": "Establishes an alternate GPU family; compatibility and cloud availability must be measured for the startup's stack."
+    },
+    {
+      "claim": "AWS documents trn2.48xlarge with 16 Trainium2 chips and 1.5 TB accelerator memory and supports PyTorch and JAX through the Neuron stack.",
+      "source_or_reference": "https://aws.amazon.com/ec2/instance-types/trn2/",
+      "date_or_recency": "Accessed 2026-11-13",
+      "evidence_type": "cloud-vendor product documentation and marketing claim",
+      "notes": "A credible rental alternative when porting is feasible. AWS's price-performance claim is not an independent result and must not be used as the decision."
+    },
+    {
+      "claim": "Google documents TPU v5p at 95 GiB user-allocatable HBM and 2,765 GB/s bandwidth per chip and notes support for large multi-chip configurations.",
+      "source_or_reference": "https://docs.cloud.google.com/tpu/docs/v5p",
+      "date_or_recency": "Accessed 2026-11-13",
+      "evidence_type": "cloud-vendor technical documentation",
+      "notes": "A credible cloud ASIC option, but a different software and topology path that requires an application-specific porting test."
+    },
+    {
+      "claim": "MLPerf Inference v6.1 reports 30 submitters and 120 systems and defines an architecture-neutral, representative, reproducible benchmark process.",
+      "source_or_reference": "https://mlcommons.org/2026/09/mlperf-inference-v6-1-results/",
+      "date_or_recency": "Published 2026-09-16; accessed 2026-11-13",
+      "evidence_type": "independent multi-vendor benchmark-program release",
+      "notes": "Supports disciplined comparison, but startup training economics still require its own model, cloud price, quota, and engineering-time measurements."
+    }
+  ],
+  "contrary_evidence_or_limitations": [
+    "The startup did not supply its exact models, data sizes, precision, training duration, inference service level, monthly budget, current cloud discounts, quotas, or geographic availability.",
+    "No evidence here measures the same startup workload across NVIDIA, AMD, Trainium2, and TPU under comparable current commercial terms.",
+    "The stale/hype-sensitive claim is that a cloud provider's stated accelerator price-performance advantage will lower this startup's total experiment cost. Compiler coverage, porting time, failed runs, quota delay, and discounts can dominate chip-level claims.",
+    "Maintaining more than two active stacks could consume more scarce engineering time than the optionality is worth; the test should select one baseline and at most one maintained alternative."
+  ],
+  "confidence_and_uncertainty": "High confidence that rental rather than ownership fits the six-month horizon and variable demand. Moderate confidence that NVIDIA should be the compatibility baseline and one alternate stack should be tested. Low confidence in which alternate or instance is best until the startup measures completed-run cost, developer time, and quota availability.",
+  "value_opportunity_implication": "A short, instrumented cloud comparison can increase iteration speed, expose a lower-cost or more available alternative, and give the startup leverage without spending capital or building facilities.",
+  "risk_governance_implication": "Govern cloud experiments through budget alerts, approved regions and data controls, reproducible run manifests, and a fixed porting-time budget. Avoid silent multi-cloud complexity: designate one production default and document the conditions for using the alternate.",
+  "recommendation_management_implication": "Over four weeks, run one representative training job and one inference workload first on an NVIDIA cloud baseline and then on one alternate chosen for framework compatibility—AMD GPU, Trainium2, or TPU. Measure wall-clock time, total cloud cost, queue delay, failures, engineer hours, and accepted output. Keep on-demand or short commitments during the experiment; do not buy hardware. After two repeat runs, choose one default and retain the alternate only if it meets a management-approved cost, availability, or portability advantage after engineering time is included.",
+  "change_monitoring_triggers": [
+    "Every experiment: record accelerator type, region, software version, queue delay, failures, wall-clock time, cloud cost, and engineer hours; discard comparisons that omit failed runs or porting labor.",
+    "Week 2 porting gate: stop the alternate-stack test if it cannot complete the representative model within the fixed engineering-time budget, unless it is the only path meeting a customer requirement.",
+    "Week 4 selection gate: retain an alternate only if two repeat runs show a management-approved advantage in completed-run cost, time, or quota availability after developer time is counted.",
+    "Monthly spend gate: investigate and cap the workload if actual accelerator spend exceeds the startup's approved monthly budget or idle-resource threshold; do not wait for a quarterly architecture review.",
+    "Quarterly access review: compare current instance prices, committed-use terms, quotas, supported models, and one matched benchmark; consider reserved capacity only after sustained utilization is demonstrated.",
+    "Customer-triggered reassessment: reopen the shortlist if a customer contract changes approved region, data handling, latency, or availability requirements."
+  ],
+  "abstention_or_more_information_needed": [
+    "Representative training and inference models, precision, input sizes, and acceptance criteria",
+    "Actual cloud account prices, discounts, quotas, regions, and interruption policies",
+    "Monthly budget, delivery milestone, and management-approved porting-time limit",
+    "Measured completed-run cost, queue delay, failures, and engineer hours on the baseline and alternate",
+    "Customer data-location, retention, security, latency, and availability requirements"
+  ]
+}

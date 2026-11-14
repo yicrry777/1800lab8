@@ -1,0 +1,14 @@
+{
+  "emerging_technology": "Data-center AI GPU accelerators for generative-AI inference",
+  "intended_application": "Optional future stress test: batch translation of public-domain archives at a university",
+  "organization": "A public research university library",
+  "industry_sector": "Higher education and cultural heritage",
+  "business_need": "Increase access to multilingual collections",
+  "users_stakeholders": "Librarians, researchers, students, IT, accessibility staff, and grant sponsors",
+  "adoption_posture": "Moderate and grant-constrained",
+  "capabilities_constraints": "Existing shared research cluster, seasonal demand, and no dedicated procurement budget",
+  "risk_consequence_context": "Low immediate operational consequence; accuracy and equitable access matter; jobs can be rerun",
+  "management_question": "Should the library reserve shared-cluster capacity or buy a dedicated accelerator?",
+  "time_horizon": "One academic year",
+  "additional_context": "Optional third case; not required for the minimum primary-versus-contrast test."
+}

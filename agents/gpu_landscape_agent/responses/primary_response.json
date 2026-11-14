@@ -1,0 +1,90 @@
+{
+  "agent": {
+    "name": "AI GPU Landscape Agent",
+    "specialty": "data-center AI GPU and accelerator landscape analysis",
+    "version": "1.0-tested"
+  },
+  "analytical_question": "As of 2026-11-13, should a mid-sized U.S. life-sciences company authorize a 12-week evidence-gathering pilot for on-premises AI GPU inference, while deferring any production hardware purchase until workload, facilities, security, and commercial evidence are available?",
+  "general_et_finding": "Data-center AI GPUs are mature deployable infrastructure, but the landscape is still changing too quickly to treat a chip generation as a durable answer. Competition now spans NVIDIA and AMD GPU systems plus cloud-provider ASICs such as AWS Trainium and Google TPU; CPUs, smaller accelerators, hosted capacity, and managed services remain credible incumbents for some inference loads. Current NVIDIA B300 and AMD MI350X documentation shows convergence at 288 GB of HBM-class memory and up to 8 TB/s bandwidth per accelerator, while their software, system, service, and access models differ. MLPerf provides an architecture-neutral method for comparing submitted systems, but no published result or peak specification substitutes for testing the company's exact model, precision, context length, concurrency, and service-level target.",
+  "application_finding": "For a private document RAG assistant, the relevant shortlist is not every leading accelerator. It is: (1) an NVIDIA CUDA baseline because the team already has that skill; (2) one AMD ROCm configuration to measure whether memory capacity, availability, or commercial terms justify porting; and (3) one security-approved hosted or cloud accelerator path, potentially including a cloud ASIC, to test whether ownership is necessary. Managed public model services should be excluded unless data handling and retention are approved. Compare end-to-end tokens per second at an agreed latency and quality threshold, supported context/model size, operator effort, energy, and cost per million accepted tokens—not peak FLOPS. A lower-cost CPU or smaller-GPU baseline should also be measured if pilot concurrency is low.",
+  "organization_specific_finding": "The company should not buy a production-scale GPU system now. Its CUDA experience makes NVIDIA the lowest-friction baseline, but that is an inference about migration effort, not proof of best economics. Its limited spare power, absent production liquid cooling, small ML platform team, conservative posture, and unmeasured demand make a large owned system especially exposed to facilities delay and low utilization. A 12-week pilot using evaluation, loaner, or approved hosted capacity plus a parallel facilities assessment is reversible and proportionate. AMD and a hosted alternative should remain in the test to preserve bargaining and exit options, but production vendor selection must wait for comparable quotes and representative measurements.",
+  "evidence": [
+    {
+      "claim": "NVIDIA's current enterprise reference architecture lists 288 GB HBM3e and up to 8 TB/s bandwidth per B300 GPU, with 2.30 TB per eight-GPU node.",
+      "source_or_reference": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory/latest/components.html",
+      "date_or_recency": "NVIDIA Enterprise RA dated January 2026; accessed 2026-11-13",
+      "evidence_type": "vendor technical documentation",
+      "notes": "Useful for system-envelope screening; it does not establish this RAG workload's latency, throughput, power, or cost."
+    },
+    {
+      "claim": "AMD lists MI350X at 288 GB HBM3E, 8 TB/s peak memory bandwidth, full-chip ECC, virtualization support, and 1000 W typical board power.",
+      "source_or_reference": "https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html",
+      "date_or_recency": "Launch date 2025-06-12; accessed 2026-11-13",
+      "evidence_type": "vendor product specification",
+      "notes": "Supports memory and facilities screening; peak figures do not prove application performance or total cost."
+    },
+    {
+      "claim": "AWS offers Trainium2 as a cloud-only, purpose-built generative-AI accelerator family; AWS states 16 Trainium2 chips and 1.5 TB accelerator memory in a trn2.48xlarge instance.",
+      "source_or_reference": "https://aws.amazon.com/ec2/instance-types/trn2/",
+      "date_or_recency": "Accessed 2026-11-13",
+      "evidence_type": "cloud-vendor product documentation and marketing claim",
+      "notes": "Shows a credible adjacent class and rental model. AWS's stated 30-40% price-performance advantage is not treated as independent evidence."
+    },
+    {
+      "claim": "Google documents TPU v5p at 95 GiB user-allocatable HBM and 2,765 GB/s HBM bandwidth per chip, with scalable multi-chip configurations.",
+      "source_or_reference": "https://docs.cloud.google.com/tpu/docs/v5p",
+      "date_or_recency": "Accessed 2026-11-13",
+      "evidence_type": "cloud-vendor technical documentation",
+      "notes": "Demonstrates another established cloud ASIC path; it is not a controlled comparison with the GPU systems above."
+    },
+    {
+      "claim": "MLPerf Inference v6.1 describes an architecture-neutral, representative, reproducible benchmark process and reports 30 submitters and 120 systems, indicating a broad and rapidly changing inference field.",
+      "source_or_reference": "https://mlcommons.org/2026/09/mlperf-inference-v6-1-results/",
+      "date_or_recency": "Published 2026-09-16; accessed 2026-11-13",
+      "evidence_type": "independent multi-vendor benchmark-program release",
+      "notes": "Use only matching models, scenarios, system scale, software, and quality targets; do not compare unlike submissions as a head-to-head test."
+    },
+    {
+      "claim": "The U.S. Department of Energy's 2025 update estimates that data centers could use 9.5% to 15.3% of U.S. electricity by 2030 and identifies AI-server utilization and cooling as important drivers.",
+      "source_or_reference": "https://www.energy.gov/documents/united-states-data-center-energy-usage-report-2025-update",
+      "date_or_recency": "2025 report update; DOE resource last updated 2026-06-22; accessed 2026-11-13",
+      "evidence_type": "government and national-laboratory analysis",
+      "notes": "Supports treating energy and cooling as decision dimensions; national forecasts do not estimate this company's facility requirements."
+    },
+    {
+      "claim": "U.S. advanced-computing semiconductor controls remain changeable; a January 2026 Commerce release describes case-by-case review for H200, MI325X, and similar exports to China under stated conditions.",
+      "source_or_reference": "https://www.bis.gov/sites/default/files/documents/DoC%20Revises%20License%20Review%20Policy%20for%20Semiconductors%20Exports.pdf",
+      "date_or_recency": "Published 2026-01-13; accessed 2026-11-13",
+      "evidence_type": "U.S. government policy release",
+      "notes": "A monitoring item for supply and cross-border use, not a reason to block this domestic pilot absent a relevant destination or end user."
+    }
+  ],
+  "contrary_evidence_or_limitations": [
+    "No approved production model, precision, context length, retrieval corpus size, concurrency, latency target, quality threshold, or utilization forecast exists, so required memory and accelerator count cannot be responsibly sized.",
+    "No comparable current system quotes, hosted-capacity terms, support terms, lead times, or three-year facilities estimates were supplied, so no cost winner can be named.",
+    "No representative company workload appears in the cited evidence. Published MLPerf results can guide method selection but cannot be presented as this application's result.",
+    "The claim most vulnerable to hype and staleness is that a newest-generation accelerator's peak low-precision performance or memory bandwidth will automatically produce lower RAG cost. Software maturity, batching, model architecture, utilization, system power, and commercial terms can reverse that conclusion.",
+    "The Agent does not validate RAG answer quality, scientific validity, security compliance, or regulated-workflow controls; those require separate specialists and organizational owners."
+  ],
+  "confidence_and_uncertainty": "High confidence that the landscape is multi-vendor, system-level, and fast-moving and that peak specifications are insufficient. Moderate confidence that a reversible pilot is appropriate. Low confidence in any vendor, ownership, or capacity choice until representative benchmarks, facility constraints, and comparable quotes are available.",
+  "value_opportunity_implication": "A staged pilot can establish whether private inference materially improves document-search latency and data control while producing reusable workload, utilization, portability, and facilities evidence. Including a non-NVIDIA path creates a credible option without forcing premature migration.",
+  "risk_governance_implication": "The main near-term governance need is a decision gate: no capital purchase or production authorization based on vendor specifications alone. Security must approve data location and logging; facilities must validate rack power and cooling; application owners must set quality and human-review criteria; finance must compare equivalent three-year service levels and exit costs.",
+  "recommendation_management_implication": "Authorize a 12-week evidence-gathering pilot, not a production deployment or hardware purchase. Use an NVIDIA environment as the operational baseline, time-box an AMD ROCm port, and test one security-approved hosted alternative. In parallel, complete rack-level power/cooling and network assessments and obtain comparable written quotes. At the gate, compare cost per million accepted tokens at the agreed latency, operator and porting effort, availability, energy, and three-year exit-adjusted cost. Defer ownership if the workload remains uncertain or facility work dominates the schedule; abstain from naming a vendor winner now.",
+  "change_monitoring_triggers": [
+    "Week 2 design gate: pause the comparison until application owners approve the model, quality threshold, context length, concurrency, latency, and human-review workflow.",
+    "Week 4 facilities gate: remove any on-premises configuration that exceeds the documented rack-power or cooling envelope, or price the required upgrade explicitly rather than treating it as sunk infrastructure.",
+    "Week 8 portability gate: reconsider the non-CUDA candidate if measured porting and operating effort exceeds the management-approved engineering budget without a compensating workload or commercial benefit.",
+    "Week 12 ownership gate: defer purchase unless projected utilization, comparable written quotes, and three-year total cost meet management's preapproved threshold versus a controlled hosted option; do not create the threshold after seeing vendor results.",
+    "Quarterly until procurement: refresh matched MLPerf evidence, software support, delivery lead times, quotes, and vendor road maps; rerun the decision if a candidate changes by at least one product generation or the selected model changes materially.",
+    "Immediate reassessment: reopen security or sourcing review if data-location policy, supplier availability, export-control applicability, or support status changes for the intended deployment."
+  ],
+  "abstention_or_more_information_needed": [
+    "Approved representative model, precision, context length, retrieval pipeline, and test corpus",
+    "Quality, latency, throughput, concurrency, availability, and utilization targets",
+    "Measured results on comparable complete systems, including software version and system scale",
+    "Current written purchase and hosted-capacity quotes with support, lead time, minimum term, and exit conditions",
+    "Rack-level power, cooling, networking, and facilities-upgrade assessment",
+    "Security-approved data-location, retention, access-control, and logging requirements",
+    "Measured CUDA-to-ROCm or ASIC-porting effort and ongoing operator burden"
+  ]
+}

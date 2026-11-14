@@ -1,0 +1,54 @@
+{
+  "agent": {
+    "name": "AI GPU Landscape Agent",
+    "specialty": "data-center AI GPU and accelerator landscape analysis",
+    "version": "0.1-initial"
+  },
+  "analytical_question": "What is the current AI accelerator landscape and should the life-sciences company test data-center GPUs for private generative-AI inference?",
+  "general_et_finding": "Data-center AI GPUs are commercially mature but moving quickly. NVIDIA B300 and AMD MI350X both list 288 GB of high-bandwidth memory, while cloud-only alternatives such as AWS Trainium2 and Google TPU compete on integrated scale and economics. Peak vendor specifications show a broadening field but do not establish application performance.",
+  "application_finding": "Large-memory accelerators can support generative-AI inference, and an on-premises deployment could keep proprietary documents in company-controlled infrastructure. The company should compare current NVIDIA and AMD systems with cloud accelerators.",
+  "organization_specific_finding": "The organization's CUDA experience favors NVIDIA, while limited power, cooling, and ROCm experience increase the risk of an immediate AMD or large on-premises commitment. A pilot is more appropriate than production procurement.",
+  "evidence": [
+    {
+      "claim": "NVIDIA documents 288 GB HBM3e per B300 GPU and up to 8 TB/s bandwidth.",
+      "source_or_reference": "https://docs.nvidia.com/enterprise-reference-architectures/hgx-ai-factory/latest/components.html",
+      "date_or_recency": "Accessed 2026-11-13",
+      "evidence_type": "vendor technical documentation",
+      "notes": "Peak specifications; not a workload benchmark."
+    },
+    {
+      "claim": "AMD lists 288 GB HBM3E, 8 TB/s bandwidth, and 1000 W typical board power for MI350X.",
+      "source_or_reference": "https://www.amd.com/en/products/accelerators/instinct/mi350/mi350x.html",
+      "date_or_recency": "Product launched 2025-06-12; accessed 2026-11-13",
+      "evidence_type": "vendor product specification",
+      "notes": "Peak specifications; not a workload benchmark."
+    },
+    {
+      "claim": "AWS positions Trainium2 as a purpose-built cloud alternative for generative-AI training and inference.",
+      "source_or_reference": "https://aws.amazon.com/ec2/instance-types/trn2/",
+      "date_or_recency": "Accessed 2026-11-13",
+      "evidence_type": "cloud-vendor product page",
+      "notes": "AWS price-performance claims are vendor claims."
+    }
+  ],
+  "contrary_evidence_or_limitations": [
+    "No representative RAG workload, concurrency target, latency target, production availability requirement, written vendor quote, or facilities assessment was supplied.",
+    "Vendor peak specifications are not comparable evidence of end-to-end application performance."
+  ],
+  "confidence_and_uncertainty": "Moderate confidence that multiple viable accelerator families exist; low confidence in any product or ownership choice without benchmarking and current commercial data.",
+  "value_opportunity_implication": "A pilot could determine whether local acceleration provides useful latency and data-control benefits.",
+  "risk_governance_implication": "A premature purchase could create stranded capital, vendor lock-in, and power or cooling overruns.",
+  "recommendation_management_implication": "Authorize a bounded pilot comparing NVIDIA, AMD, and one cloud accelerator option before any production purchase.",
+  "change_monitoring_triggers": [
+    "New GPU generations or accelerator products",
+    "Independent benchmark results",
+    "Material pricing or availability changes",
+    "Changes to export controls or power requirements"
+  ],
+  "abstention_or_more_information_needed": [
+    "Representative model and retrieval workload",
+    "Latency, throughput, concurrency, and availability targets",
+    "Current written system and cloud quotes",
+    "Facilities power and cooling assessment"
+  ]
+}

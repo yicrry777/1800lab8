@@ -1,0 +1,14 @@
+{
+  "emerging_technology": "Data-center AI GPU accelerators for generative-AI inference",
+  "intended_application": "An on-premises retrieval-augmented generation assistant that summarizes and searches proprietary research, quality, and regulatory documents; all consequential outputs remain subject to employee review",
+  "organization": "A mid-sized U.S. life-sciences company with approximately 2,500 employees",
+  "industry_sector": "Life sciences and pharmaceutical research",
+  "business_need": "Reduce time spent locating and synthesizing internal evidence while keeping sensitive intellectual property inside company-controlled infrastructure",
+  "users_stakeholders": "Research scientists, quality and regulatory staff, information security, infrastructure operations, legal/compliance, finance, and executive sponsors",
+  "adoption_posture": "Conservative fast follower; willing to run a bounded pilot but unwilling to depend on unverified performance or immature operational controls",
+  "capabilities_constraints": "A small ML platform team; an existing on-premises data center with limited spare power and no production liquid-cooling capability; strong NVIDIA CUDA experience; limited AMD ROCm experience; procurement requires competitive bids; no approved production workload, measured concurrency profile, vendor quote, or facilities upgrade estimate yet",
+  "risk_consequence_context": "Disclosure of research IP, unreliable summaries entering regulated workflows, infrastructure outages, stranded capital, vendor lock-in, and power/cooling overruns are consequential; human review remains mandatory",
+  "management_question": "Should management authorize a 12-week benchmark and facilities-assessment pilot before considering an on-premises AI GPU purchase, or should it defer ownership and use a controlled cloud or hosted alternative?",
+  "time_horizon": "Pilot decision now; possible production procurement within 12 months; three-year infrastructure life",
+  "additional_context": "Assessment date: 2026-11-13. The decision is about the accelerator-compute landscape, not whether the underlying RAG application is clinically or scientifically valid. Any production recommendation must be conditional on representative workload benchmarks and current written quotes."
+}
